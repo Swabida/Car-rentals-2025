@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Page</title>
+    <link rel="stylesheet" href="assets/css/booking.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showPage('home')">
+                <i class="bi bi-car-front-fill"></i> S & I CAR RENTALS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">Book Now</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  <!-- Booking Page -->
+  <section class="bookigsteps">
+    <div id="booking" class="page">
+        <div class="container">
+            <h1 class="text-center mb-4">Book Your Car</h1>
+            
+            <div class="booking-form">
+                <form id="bookingForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Pick-up Location</label>
+                            <select class="form-select" required>
+                                <option value="">Select location</option>
+                                <option>Downtown Office</option>
+                                <option>Airport Terminal</option>
+                                <option>City Center</option>
+                                <option>Train Station</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Drop-off Location</label>
+                            <select class="form-select" required>
+                                <option value="">Select location</option>
+                                <option>Downtown Office</option>
+                                <option>Airport Terminal</option>
+                                <option>City Center</option>
+                                <option>Train Station</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Pick-up Date</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Drop-off Date</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Car Type</label>
+                            <select class="form-select" id="carType" required>
+                                <option value="">Select car type</option>
+                                <option value="Toyota Camry" data-price="45">Toyota Camry - $45/day</option>
+                                <option value="Honda CR-V" data-price="65">Honda CR-V - $65/day</option>
+                                <option value="BMW 3 Series" data-price="95">BMW 3 Series - $95/day</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Driver's Age</label>
+                            <input type="number" class="form-control" min="21" max="99" placeholder="Enter age" required>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-check-circle"></i> Confirm Booking
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Available Cars -->
+            <h3 class="mb-4">Available Cars</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="car-card">
+                        <img src="assets/images/greenlamborghini.jpg" alt="Green Lamborghini">
+                        <div class="car-card-body">
+                            <h5>Green Lamborghini</h5>
+                            <p class="text-muted">Luxury car for cool price</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="car-price">$100/day</span>
+                                <button class="btn btn-primary" onclick="selectCar('Green Lamborghini', 100)">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-card">
+                        <img src="assets/images/lamborghini.jpg" alt="Lamborghini">
+                        <div class="car-card-body">
+                            <h5>Lamborghini</h5>
+                            <p class="text-muted">Convertible for scenic drives</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="car-price">$80/day</span>
+                                <button class="btn btn-primary" onclick="selectCar('Lamborghini', 80)">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-card">
+                        <img src="assets/images/chevroletcorvette.jpg" alt="Chevrolet Corvette">
+                        <div class="car-card-body">
+                            <h5>Chevrolet Corvette</h5>
+                            <p class="text-muted">For Luxury Driving</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="car-price">$60/day</span>
+                                <button class="btn btn-primary" onclick="selectCar('Chevrolet Corvette', 60)">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/booking.js"></script>
+    
+</body>
+</html>

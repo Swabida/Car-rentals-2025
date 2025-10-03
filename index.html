@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S & I CAR RENTALS</title>
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showPage('home')">
+                <i class="bi bi-car-front-fill"></i> S & I CAR RENTALS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">Book Now</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero text-center">
+                <h1>Find Your Perfect Ride</h1>
+                <p class="lead">Premium car rental services at affordable prices</p>
+               <a href="booking.html" class="btn btn-light btn-lg">
+                 <i class="bi bi-calendar-check"></i> Book Now
+               </a>
+            </div>
+
+
+
+            <!-- Featured Cars -->
+            <h2 class="text-center mb-4">Featured Vehicles</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="car-card">
+                        <img src="assets/images/rangerover.jpg" alt="Rang Rover"/>
+                        <div class="car-card-body">
+                            <h5>Rang Rover</h5>
+                            <p class="text-muted">Comfortable sedan for city drives</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="car-price">$205/day</span>
+                                <button class="btn btn-primary" onclick="selectCar('Rang Rover', 205)">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-card">
+                        <img src="assets/images/mercedesbenz.jpg" alt="Mercedes Benz">
+                        <div class="car-card-body">
+                            <h5>Mercedes Benz</h5>
+                            <p class="text-muted">Spacious SUV for family trips</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="car-price">$65/day</span>
+                                <button class="btn btn-primary" onclick="selectCar('Honda CR-V', 65)">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-card">
+                        <img src="assets/images/bmw.jpg" alt="Luxury BMW 3"/>
+                        <div class="car-card-body">
+                            <h5>BMW 3 Series</h5>
+                            <p class="text-muted">Luxury sedan for special occasions</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="car-price">$145/day</span>
+                                <button class="btn btn-primary" onclick="selectCar('BMW 3 Series', 145)">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-card">
+                        <img src="assets/images/bmw6.jpg" alt="Luxury BMW 6"/>
+                        <div class="car-card-body">
+                            <h5>BMW 6 Series</h5>
+                            <p class="text-muted">Luxury BMW 6 for special occasions</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="car-price">$145/day</span>
+                                <button class="btn btn-primary" onclick="selectCar('BMW 6 Series', 145)">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-card">
+                        <img src="assets/images/ferarri 458.jpg" alt="Luxury ferarri 458"/>
+                        <div class="car-card-body">
+                            <h5>ferarri 458</h5>
+                            <p class="text-muted">Luxury ferarri for special occasions</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="car-price">$145/day</span>
+                                <button class="btn btn-primary" onclick="selectCar('ferarri 458', 145)">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-card">
+                        <img src="assets/images/bmwe90.jpg" alt="Luxury bmwe 90"/>
+                        <div class="car-card-body">
+                            <h5>Bmwe 90</h5>
+                            <p class="text-muted">Luxury bmwe90 for special occasions</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="car-price">$145/day</span>
+                                <button class="btn btn-primary" onclick="selectCar('bmwe 90', 145)">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Call to Action -->
+    <section class="cta">
+      <div class="container animate__animated animate__zoomIn">
+        <h2>Ready to experience our service?</h2>
+        <a href="contact.html" class="btn-primary">Contact Us </a>
+      </div>
+    </section>
+ 
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3>S & I CAR RENTALS</h3>
+            <p>
+              Gives amazing service in Ghana since 2020.
+            </p>
+            <div class="footer-social">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul>
+              <li>
+                <a href="index.html"
+                  ><i class="fas fa-chevron-right"></i> Home</a
+                >
+              </li>
+              <li>
+                <a href="booking.html"
+                  ><i class="fas fa-chevron-right"></i> Book Now</a
+                >
+              </li>
+              <li>
+                <a href="about.html"
+                  ><i class="fas fa-chevron-right"></i> About Us</a
+                >
+              </li>
+              <li>
+                <a href="contact.html"
+                  ><i class="fas fa-chevron-right"></i> Contact Us</a
+                >
+              </li>
+              <li>
+                <a href="contact.html"
+                  ><i class="fas fa-chevron-right"></i> Register</a
+                >
+              </li>
+              <li>
+                <a href="contact.html"
+                  ><i class="fas fa-chevron-right"></i> Login</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Accra, Ghana</p>
+            <p><i class="fas fa-phone"></i> +233 538 484 308</p>
+            <p><i class="fas fa-envelope"></i> swabidaissahaku@gmail.com</p>
+            <p><i class="fas fa-clock"></i> Mon-Fri: 8AM - 5PM</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Car Rentals. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

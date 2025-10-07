@@ -33,3 +33,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!-- Simple form markup (use bootstrap) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Car</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>🚗 SwiftDrive</h2>
+    <ul>
+      <li><a href="index.php">Dashboard</a></li>
+      <li><a href="bookings.php">Bookings</a></li>
+      <li><a href="add_car.php" class="active">Add Car</a></li>
+      <li><a href="logout.php" class="logout">Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <h1>Add New Car</h1>
+    <form method="POST" class="form-box">
+      <input type="text" name="make" placeholder="Car Make" required>
+      <input type="text" name="model" placeholder="Model" required>
+      <input type="number" name="year" placeholder="Year" required>
+      <input type="number" name="price" placeholder="Price per day" required>
+      <button type="submit">Add Car</button>
+    </form>
+    <?php if(isset($msg)) echo "<p class='success'>$msg</p>"; ?>
+  </main>
+</body>
+</html>

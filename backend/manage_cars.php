@@ -4,8 +4,19 @@ if (!isset($_SESSION['admin'])) {
   header("Location: login.php");
   exit();
 }
-include 'db.php';
-$result = $conn->query("SELECT * FROM cars");
+$host = 'localhost';
+$dbname = 'car_db'; // change to your database name
+$username = 'root';
+$password = '';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Connection successful, don't run any queries here
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +31,7 @@ $result = $conn->query("SELECT * FROM cars");
 <body>
   <div class="d-flex">
     <div class="sidebar bg-dark text-white p-3 vh-100">
-      <h3 class="text-center mb-4"><i class="fa-solid fa-car"></i> SwiftDrive</h3>
+      <h3 class="text-center mb-4"><i class="fa-solid fa-car"></i> S & I CAR RENTALS</h3>
       <ul class="nav flex-column">
         <li><a href="index.php" class="nav-link text-white"><i class="fa fa-gauge me-2"></i> Dashboard</a></li>
         <li><a href="bookings.php" class="nav-link text-white"><i class="fa fa-calendar-check me-2"></i> Bookings</a></li>
@@ -36,7 +47,6 @@ $result = $conn->query("SELECT * FROM cars");
         <thead class="table-dark">
           <tr>
             <th>ID</th>
-            <th>Make</th>
             <th>Model</th>
             <th>Year</th>
             <th>Price</th>
@@ -47,10 +57,11 @@ $result = $conn->query("SELECT * FROM cars");
           <?php while($row = $result->fetch_assoc()): ?>
             <tr>
               <td><?= $row['id'] ?></td>
-              <td><?= $row['make'] ?></td>
               <td><?= $row['model'] ?></td>
               <td><?= $row['year'] ?></td>
               <td>$<?= $row['price'] ?></td>
+              <td>$<?= $row['description'] ?></td>
+              <td>$<?= $row['imageName'] ?></td>
               <td>
                 <a href="view_car.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i></a>
                 <a href="edit_car.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>

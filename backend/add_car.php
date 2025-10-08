@@ -1,11 +1,38 @@
 <?php
-require_once __DIR__.'/../includes/db.php';
-require_once __DIR__.'/../includes/auth.php';
+$host = 'localhost';
+$dbname = 'car_db'; // change to your database name
+$username = 'root';
+$password = '';
+
+try {
+    // Use PDO for database connection
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
+
+// includes/auth.php
+if (session_status() == PHP_SESSION_NONE) session_start();
+
+function requireAdmin() {
+  if (empty($_SESSION['admin_username'])) {
+    header('Location: index.php');
+    exit;
+  }
+}
+
+function currentAdmin($pdo) {
+  if (empty($_SESSION['admin_username'])) return null;
+  $stmt = $pdo->prepare("SELECT username,password FROM admins WHERE username= ?");
+  $stmt->execute([$_SESSION['admin_username']]);
+  return $stmt->fetch();
+}
 requireAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $id = $_POST['id'];
-  $make = $_POST['make'] ?? '';
+  $model = $_POST['model'] ?? '';
   $year = (int)($_POST['year'] ?? 0);
   $price = (float)($_POST['price'] ?? 0);
   $description = $_POST['description'];
@@ -28,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $stmt = $pdo->prepare("INSERT INTO cars (id,model,year,price,description,image) VALUES (?,?,?,?,?)");
   $stmt->execute([$id,$model,$year,$price,$description,$imageName]);
-  header('Location: cars.php');
+  header('Location: view_cars.php');
   exit;
 }
 ?>

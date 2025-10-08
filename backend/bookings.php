@@ -1,11 +1,22 @@
 <?php
+$host = 'localhost';
+$dbname = 'car_db'; // change to your database name
+$username = 'root';
+$password = '';
+
+try {
+    // Use PDO for database connection
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
+
 session_start();
 if (!isset($_SESSION['admin'])) {
-  header("Location: login.php");
-  exit();
+    header("Location: login.php");
+    exit();
 }
-include 'db.php';
-$result = $conn->query("SELECT * FROM bookings");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +29,7 @@ $result = $conn->query("SELECT * FROM bookings");
 </head>
 <body>
   <div class="d-flex">
+    <!-- Sidebar -->
     <div class="sidebar bg-dark text-white p-3 vh-100">
       <h3 class="text-center mb-4"><i class="fa-solid fa-car"></i> S & I CAR RENTALS</h3>
       <ul class="nav flex-column">
@@ -28,34 +40,47 @@ $result = $conn->query("SELECT * FROM bookings");
       </ul>
     </div>
 
+    <!-- Main Content -->
     <div class="flex-grow-1 p-4">
       <h2 class="mb-4">All Bookings</h2>
+
       <table class="table table-striped table-hover bg-white shadow-sm">
         <thead class="table-dark">
           <tr>
             <th>ID</th>
-            <th>car_id</th>
-            <th>customer_name</th>
-            <th>Pick_up_date</th>
-            <th>drop-off_date</th>
-            <th>Pick_up_location</th>
-            <th>drop-off_location</th>
-            <th>total_price</th>
+            <th>Car ID</th>
+            <th>Customer Name</th>
+            <th>Pick-up Date</th>
+            <th>Drop-off Date</th>
+            <th>Pick-up Location</th>
+            <th>Drop-off Location</th>
+            <th>Total Price</th>
           </tr>
         </thead>
         <tbody>
-          <?php while($row = $result->fetch_assoc()): ?>
-            <tr>
-              <td><?= $row['id'] ?></td>
-              <td><?= $row['car_id'] ?></td>
-              <td><?= $row['customer_name'] ?></td>
-              <td><?= $row['Pick_up_date'] ?></td>
-              <td><?= $row['drop-off_date'] ?></td>
-              <td><?= $row['Pick_up_location'] ?></td>
-              <td><?= $row['drop_off_location'] ?></td>
-              <td><?= $row['total_price'] ?></td>
-            </tr>
-          <?php endwhile; ?>
+          <?php
+          // Fetch data using PDO
+          $sql = "SELECT * FROM bookings";
+          $stmt = $pdo->query($sql);
+          $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+          if ($bookings) {
+              foreach ($bookings as $row) {
+                  echo "<tr>
+                          <td>{$row['id']}</td>
+                          <td>{$row['car_id']}</td>
+                          <td>{$row['customer_name']}</td>
+                          <td>{$row['pick_up_date']}</td>
+                          <td>{$row['drop_off_date']}</td>
+                          <td>{$row['pick_up_location']}</td>
+                          <td>{$row['drop_off_location']}</td>
+                          <td>{$row['total_price']}</td>
+                        </tr>";
+              }
+          } else {
+              echo "<tr><td colspan='8' class='text-center'>No bookings found.</td></tr>";
+          }
+          ?>
         </tbody>
       </table>
     </div>

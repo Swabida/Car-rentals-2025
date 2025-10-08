@@ -1,6 +1,17 @@
 <?php
-require_once '../includes/db.php';
-require_once '../includes/auth.php';
+$host = 'localhost';
+$dbname = "car_db";
+$username = 'root';
+$password = '';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Connection successful, don't run any queries here
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
+require_once 'backend/includes/auth.php';
 requireAdmin();
 
 $id = $_GET['id'];

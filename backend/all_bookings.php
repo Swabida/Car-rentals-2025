@@ -1,5 +1,16 @@
 <?php
-include 'db.php';
+$host = 'localhost';
+$dbname = 'car_db'; // change to your database name
+$username = 'root';
+$password = '';
+
+try {
+    // Use PDO for database connection
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
 session_start();
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
 
-  $stmt = $pdo->prepare("INSERT INTO cars (make,model,year,price,image) VALUES (?,?,?,?,?)");
+  $stmt = $pdo->prepare("INSERT INTO cars (id,model,year,price,description,image) VALUES (?,?,?,?,?)");
   $stmt->execute([$id,$model,$year,$price,$description,$imageName]);
   header('Location: cars.php');
   exit;
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
   <aside class="sidebar">
-    <h2>🚗 SwiftDrive</h2>
+    <h2>S & I CAR RENTALS</h2>
     <ul>
       <li><a href="index.php">Dashboard</a></li>
       <li><a href="bookings.php">Bookings</a></li>
@@ -55,10 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <main class="content">
     <h1>Add New Car</h1>
     <form method="POST" class="form-box">
-      <input type="text" name="make" placeholder="Car Make" required>
+      <input type="text" name="id" placeholder="Car id" required>
       <input type="text" name="model" placeholder="Model" required>
       <input type="number" name="year" placeholder="Year" required>
       <input type="number" name="price" placeholder="Price per day" required>
+      <input type="text" name="description" placeholder="description" required>
+      <input type="image" name="imageName" placeholder="Car image" required>
       <button type="submit">Add Car</button>
     </form>
     <?php if(isset($msg)) echo "<p class='success'>$msg</p>"; ?>

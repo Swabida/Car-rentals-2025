@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db.php";
+include "../includes/db.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows == 1) {
         $_SESSION['admin'] = $username;
-        header("Location: dashboard.php");
+        header("Location: login.php");
         exit();
     } else {
         $error = "Invalid login!";

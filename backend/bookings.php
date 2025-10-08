@@ -19,7 +19,7 @@ $result = $conn->query("SELECT * FROM bookings");
 <body>
   <div class="d-flex">
     <div class="sidebar bg-dark text-white p-3 vh-100">
-      <h3 class="text-center mb-4"><i class="fa-solid fa-car"></i> SwiftDrive</h3>
+      <h3 class="text-center mb-4"><i class="fa-solid fa-car"></i> S & I CAR RENTALS</h3>
       <ul class="nav flex-column">
         <li class="nav-item"><a href="index.php" class="nav-link text-white"><i class="fa fa-gauge me-2"></i> Dashboard</a></li>
         <li class="nav-item"><a href="bookings.php" class="nav-link text-white active"><i class="fa fa-calendar-check me-2"></i> Bookings</a></li>
@@ -34,22 +34,26 @@ $result = $conn->query("SELECT * FROM bookings");
         <thead class="table-dark">
           <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Car Type</th>
-            <th>Pickup</th>
-            <th>Return</th>
+            <th>car_id</th>
+            <th>customer_name</th>
+            <th>Pick_up_date</th>
+            <th>drop-off_date</th>
+            <th>Pick_up_location</th>
+            <th>drop-off_location</th>
+            <th>total_price</th>
           </tr>
         </thead>
         <tbody>
           <?php while($row = $result->fetch_assoc()): ?>
             <tr>
               <td><?= $row['id'] ?></td>
-              <td><?= $row['name'] ?></td>
-              <td><?= $row['email'] ?></td>
-              <td><?= $row['car_type'] ?></td>
-              <td><?= $row['pickup_date'] ?></td>
-              <td><?= $row['return_date'] ?></td>
+              <td><?= $row['car_id'] ?></td>
+              <td><?= $row['customer_name'] ?></td>
+              <td><?= $row['Pick_up_date'] ?></td>
+              <td><?= $row['drop-off_date'] ?></td>
+              <td><?= $row['Pick_up_location'] ?></td>
+              <td><?= $row['drop_off_location'] ?></td>
+              <td><?= $row['total_price'] ?></td>
             </tr>
           <?php endwhile; ?>
         </tbody>

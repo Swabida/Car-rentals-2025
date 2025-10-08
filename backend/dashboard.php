@@ -1,0 +1,129 @@
+<?php
+session_start();
+if (!isset($_SESSION['admin'])) {
+  header("Location: login.php");
+  exit();
+}
+include '../db.php';
+
+// === Fetch summary stats ===
+$totalCars = $conn->query("SELECT COUNT(*) AS count FROM cars")->fetch_assoc()['count'];
+$totalBookings = $conn->query("SELECT COUNT(*) AS count FROM bookings")->fetch_assoc()['count'];
+$totalCustomers = $conn->query("SELECT COUNT(DISTINCT customer_name) AS count FROM bookings")->fetch_assoc()['count'];
+
+// === Fetch bookings per month ===
+$chartData = [];
+for ($month = 1; $month <= 12; $month++) {
+  $sql = "SELECT COUNT(*) AS total FROM bookings WHERE MONTH(booking_date) = $month";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  $chartData[] = $row['total'];
+}
+$chartDataJson = json_encode($chartData);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | S & I CAR RENTALS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    body { background-color: #f5f6fa; }
+    .card { border-radius: 15px; }
+    .sidebar {
+      width: 230px;
+      background-color: #222831;
+      color: white;
+      min-height: 100vh;
+    }
+    .sidebar a {
+      text-decoration: none;
+      color: white;
+      display: block;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 5px;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #00adb5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="d-flex">
+   <!-- Sidebar -->
+   <div class="sidebar p-3">
+     <h3 class="text-center mb-4"><i class="fa-solid fa-car-side"></i> S & i CAR RENTALS</h3>
+     <a href="index.php" class="active"><i class="fa fa-gauge me-2"></i> Dashboard</a>
+     <a href="manage_cars.php"><i class="fa fa-car me-2"></i> Manage Cars</a>
+     <a href="bookings.php"><i class="fa fa-calendar-check me-2"></i> Bookings</a>
+     <a href="logout.php" class="text-danger"><i class="fa fa-sign-out-alt me-2"></i> Logout</a>
+   </div>
+
+   <!-- Main content -->
+   <div class="flex-grow-1 p-4">
+     <h2 class="mb-4">Welcome, Admin 👋</h2>
+
+     <!-- Summary Cards -->
+     <div class="row mb-4">
+       <div class="col-md-4">
+         <div class="card text-center shadow p-3">
+           <h4><i class="fa fa-car text-primary"></i></h4>
+           <h5>Total Cars</h5>
+           <h2><?= $totalCars ?></h2>
+         </div>
+       </div>
+       <div class="col-md-4">
+         <div class="card text-center shadow p-3">
+           <h4><i class="fa fa-calendar-check text-success"></i></h4>
+           <h5>Total Bookings</h5>
+           <h2><?= $totalBookings ?></h2>
+         </div>
+       </div>
+       <div class="col-md-4">
+         <div class="card text-center shadow p-3">
+           <h4><i class="fa fa-users text-warning"></i></h4>
+           <h5>Total Customers</h5>
+           <h2><?= $totalCustomers ?></h2>
+         </div>
+       </div>
+     </div>
+
+     <!-- Chart -->
+     <div class="card p-4 shadow">
+       <h4 class="mb-3"><i class="fa fa-chart-bar me-2"></i>Bookings per Month</h4>
+       <canvas id="bookingsChart" height="100"></canvas>
+     </div>
+   </div>
+ </div>
+
+ <!-- Chart Script -->
+ <script>
+   const ctx = document.getElementById('bookingsChart');
+   const bookingsChart = new Chart(ctx, {
+     type: 'bar',
+     data: {
+       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+       datasets: [{
+         label: 'Bookings',
+         data: <?= json_encode($chartData) ?>,
+         backgroundColor: 'rgba(0, 173, 181, 0.7)',
+         borderColor: '#00adb5',
+         borderWidth: 1,
+         borderRadius: 6
+        }]
+      },
+     options: {
+       responsive: true,
+       scales: {
+         y: { beginAtZero: true, title: { display: true, text: 'Number of Bookings' } },
+         x: { title: { display: true, text: 'Month' } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

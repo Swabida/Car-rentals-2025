@@ -4,29 +4,56 @@ if (!isset($_SESSION['admin'])) {
   header("Location: login.php");
   exit();
 }
+
 $host = 'localhost';
-$dbname = 'car_db'; // change to your database name
+$dbname = 'car_db';
 $username = 'root';
 $password = '';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Connection successful, don't run any queries here
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }
 
+// ✅ Fetch all cars from database
+try {
+    $stmt = $pdo->query("SELECT * FROM cars");
+    $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Error fetching cars: " . $e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Manage Cars | SwiftDrive</title>
+  <title>Manage Cars | S & I CAR RENTALS</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <style>
+    body { background-color: #f5f6fa; }
+    .card { border-radius: 15px; }
+    .sidebar {
+      width: 230px;
+      background-color: #28569bff;
+      color: white;
+      min-height: 100vh;
+    }
+    .sidebar a {
+      text-decoration: none;
+      color: white;
+      display: block;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #1e3c72ff;
+    }
+  </style>
 </head>
 <body>
   <div class="d-flex">
@@ -50,25 +77,37 @@ try {
             <th>Model</th>
             <th>Year</th>
             <th>Price</th>
+            <th>Description</th>
+            <th>Image</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <?php while($row = $result->fetch_assoc()): ?>
-            <tr>
-              <td><?= $row['id'] ?></td>
-              <td><?= $row['model'] ?></td>
-              <td><?= $row['year'] ?></td>
-              <td>$<?= $row['price'] ?></td>
-              <td>$<?= $row['description'] ?></td>
-              <td>$<?= $row['imageName'] ?></td>
-              <td>
-                <a href="view_car.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i></a>
-                <a href="edit_car.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                <a href="delete_car.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></a>
-              </td>
-            </tr>
-          <?php endwhile; ?>
+          <?php if ($cars): ?>
+            <?php foreach ($cars as $row): ?>
+              <tr>
+                <td><?= htmlspecialchars($row['id']) ?></td>
+                <td><?= htmlspecialchars($row['model']) ?></td>
+                <td><?= htmlspecialchars($row['year']) ?></td>
+                <td>$<?= htmlspecialchars($row['price']) ?></td>
+                <td><?= htmlspecialchars($row['description']) ?></td>
+                <td>
+                  <?php if (!empty($row['imageName'])): ?>
+                    <img src="uploads/<?= htmlspecialchars($row['imageName']) ?>" alt="Car Image" width="80">
+                  <?php else: ?>
+                    No Image
+                  <?php endif; ?>
+                </td>
+                <td>
+                  <a href="view_car.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i></a>
+                  <a href="edit_car.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                  <a href="delete_car.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></a>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <tr><td colspan="7" class="text-center">No cars found.</td></tr>
+          <?php endif; ?>
         </tbody>
       </table>
     </div>

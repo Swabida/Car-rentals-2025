@@ -1,9 +1,13 @@
 <?php
-require_once __DIR__ . '/../config/database.php';
+// Function to format currency
+function formatCurrency($amount) {
+    return '$' . number_format($amount, 2);
+}
 
-// Function to display a styled message
+// Function to display messages
 function displayMessage($message, $type = 'info') {
-    echo "<div class='alert alert-{$type}'>" . htmlspecialchars($message) . "</div>";
+    $_SESSION['message'] = $message;
+    $_SESSION['message_type'] = $type;
 }
 
 // Function to redirect user
@@ -21,14 +25,6 @@ function isLoggedIn() {
 function sanitizeInput($input) {
     global $conn;
     return $conn->real_escape_string(trim($input));
-}
-
-// Function to format currency nicely
-function formatCurrency($amount, $currency = '$') {
-    if (!is_numeric($amount)) {
-        return $currency . "0.00";
-    }
-    return $currency . number_format($amount, 2);
 }
 
 // Function to upload image
@@ -57,9 +53,8 @@ function uploadImage($file, $folder = 'cars') {
 
 // Function to delete image
 function deleteImage($imagePath) {
-    $filePath = __DIR__ . '/../' . ltrim($imagePath, '/');
-    if (file_exists($filePath)) {
-        unlink($filePath);
+    if (file_exists(__DIR__ . '/../' . $imagePath)) {
+        unlink(__DIR__ . '/../' . $imagePath);
     }
 }
 ?>

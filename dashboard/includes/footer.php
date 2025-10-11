@@ -1,5 +1,3 @@
-<?php require_once __DIR__ . '/../config/config.php'; ?>
-
     </div> <!-- Close main-content -->
 </div> <!-- Close dashboard-container -->
 

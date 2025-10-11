@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/Database.php';
-require_once __DIR__ . '/../includes/function.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 class AuthController {
     private $db;
@@ -34,7 +34,7 @@ class AuthController {
                     $_SESSION['role'] = $user['role'];
                     
                     displayMessage('Login successful!', 'success');
-                    redirect('../views/dashboard.php');
+                    redirect('/views/dashboard.php');
                 } else {
                     displayMessage('Invalid username or password.', 'error');
                     redirect('/views/login.php');

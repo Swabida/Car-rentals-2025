@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f5f7fa;
     color: #333;
     line-height: 1.6;
@@ -199,143 +199,341 @@ body {
     background-color: #f8f9fa;
 }
 
-/* Booking Styles */
-.booking-form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
 }
 
-.booking-calendar {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+.status-badge.active {
+    background-color: #2ecc71;
+    color: white;
 }
 
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-}
-
-.calendar-day {
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.calendar-day:hover {
-    background-color: #f1f3f5;
-}
-
-.calendar-day.selected {
+.status-badge.completed {
     background-color: #3498db;
     color: white;
 }
 
-.calendar-day.disabled {
-    color: #bdc3c7;
-    cursor: not-allowed;
-}
-
-.calendar-day.booked {
+.status-badge.cancelled {
     background-color: #e74c3c;
     color: white;
 }
 
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
+.status-badge.pending {
+    background-color: #f39c12;
+    color: white;
 }
 
-.modal-content {
+.status-badge.confirmed {
+    background-color: #9b59b6;
+    color: white;
+}
+
+/* Role Badges */
+.role-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.role-badge.admin {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.role-badge.manager {
+    background-color: #f39c12;
+    color: white;
+}
+
+.role-badge.user {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Image Preview */
+.image-preview {
+    margin-top: 15px;
+    max-width: 300px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.image-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Blog Styles */
+.blog-card {
     background-color: white;
     border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
     overflow: hidden;
-    animation: modalFadeIn 0.3s ease-out;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
 }
 
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.modal-header {
+.blog-header {
     padding: 20px;
     border-bottom: 1px solid #f1f3f5;
+}
+
+.blog-header h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #7f8c8d;
+    font-size: 0.875rem;
+}
+
+.blog-content {
+    padding: 20px;
+}
+
+.blog-content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.blog-actions {
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+}
+
+.blog-actions .btn {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+}
+
+/* Booking Styles */
+.booking-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.modal-header h2 {
-    font-size: 1.5rem;
+.booking-info {
+    flex: 1;
+}
+
+.booking-info h3 {
+    margin-bottom: 10px;
     color: #2c3e50;
 }
 
-.close {
-    font-size: 1.5rem;
+.booking-info p {
+    margin-bottom: 5px;
     color: #7f8c8d;
-    cursor: pointer;
-    background: none;
-    border: none;
 }
 
-.close:hover {
+.booking-status {
+    margin-left: 20px;
+}
+
+/* Profile Styles */
+.profile-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 30px;
+}
+
+.profile-sidebar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #f1f3f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-avatar i {
+    font-size: 5rem;
+    color: #bdc3c7;
+}
+
+.profile-sidebar h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
     color: #2c3e50;
 }
 
-.modal-body {
-    padding: 20px;
+.profile-sidebar p {
+    color: #7f8c8d;
 }
 
-.modal-actions {
+.profile-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-section {
+    margin-bottom: 40px;
+}
+
+.profile-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+/* Blog Post Styles */
+.blog-post {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.blog-header {
+    margin-bottom: 30px;
+}
+
+.blog-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.blog-meta {
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 20px;
+    color: #7f8c8d;
 }
 
-/* Responsive */
+.blog-content {
+    line-height: 1.8;
+    color: #555;
+}
+
+.blog-content h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.blog-content h3 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.blog-content p {
+    margin-bottom: 15px;
+}
+
+/* Booking Details Styles */
+.booking-details {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.booking-info {
+    margin-bottom: 30px;
+}
+
+.booking-info h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.booking-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.booking-section:last-child {
+    border-bottom: none;
+}
+
+.booking-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.booking-section p {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Form Text */
+.form-text {
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+.form-text.text-muted {
+    color: #6c757d;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .form-row {
         grid-template-columns: 1fr;
     }
     
-    .booking-form {
+    .booking-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .booking-status {
+        margin: 15px 0 0 0;
+    }
+    
+    .blog-meta {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .profile-container {
         grid-template-columns: 1fr;
     }
     
-    .calendar-grid {
-        gap: 2px;
+    .blog-header h1 {
+        font-size: 2rem;
     }
 }

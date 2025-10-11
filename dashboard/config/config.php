@@ -1,7 +1,7 @@
 <?php
 // Website configuration
-define('SITE_NAME', 'Car Rental & Sales Dashboard');
-define('SITE_URL', 'http://localhost/car_rental_dashboard');
+define('SITE_NAME', 'S & I Car Rental Dashboard');
+define('SITE_URL', 'http://localhost/Car_Rental_dashboard');
 define('UPLOAD_PATH', __DIR__ . '/../assets/images/');
 
 // Session configuration

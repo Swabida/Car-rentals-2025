@@ -1,4 +1,4 @@
- $(document).ready(function() {
+$(document).ready(function() {
     // Handle form submission with AJAX
     $('form').on('submit', function(e) {
         e.preventDefault();

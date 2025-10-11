@@ -1,18 +1,18 @@
 <?php
 require_once __DIR__ . '/../includes/header.php';
-$activePage = 'register';
+$activePage = 'users';
 ?>
 
 <div class="page-header">
-    <h1>Register</h1>
-    <a href="login.php" class="btn btn-secondary">
-        <i class="fas fa-sign-in-alt"></i> Login
+    <h1>Add New User</h1>
+    <a href="index.php" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Users
     </a>
 </div>
 
 <div class="content-wrapper">
     <div class="form-container">
-        <form id="registerForm" action="controllers/UserController.php?action=register" method="post">
+        <form id="userForm" action="controllers/UserController.php?action=add" method="post">
             <div class="form-row">
                 <div class="form-group">
                     <label for="full_name">Full Name *</label>
@@ -36,13 +36,20 @@ $activePage = 'register';
             </div>
             
             <div class="form-group">
-                <label for="confirm_password">Confirm Password *</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
+                <label for="role">Role *</label>
+                <select id="role" name="role" required>
+                    <option value="user">User</option>
+                    <option value="manager">Manager</option>
+                    <option value="admin">Admin</option>
+                </select>
             </div>
             
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-user-plus"></i> Register
+                    <i class="fas fa-save"></i> Save User
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                    <i class="fas fa-undo"></i> Reset
                 </button>
             </div>
         </form>
@@ -52,5 +59,3 @@ $activePage = 'register';
 <?php
 require_once __DIR__ . '/../includes/footer.php';
 ?>
-
-
